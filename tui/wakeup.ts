@@ -8,20 +8,15 @@ const SHADOW = chalk.hex("#2709ec");
 const FACE = chalk.hex("#e8dcf8").bold;
 
 function printBannerWithShadow(ascii: string) {
-  const bannerLines = ascii.replace(/\s+$/, "").split("\n");
-  const maxLen = Math.max(...bannerLines.map((l) => l.length));
-  const rowWidth = maxLen + 2;
+  const bannerLines = ascii.trimEnd().split(/\r?\n/);
+  if (bannerLines.length === 0) return;
 
-  for (const line of bannerLines) {
-    console.log(SHADOW(" " + line.padEnd(rowWidth)));
-  }
+  const rowWidth = Math.max(...bannerLines.map((line) => line.length)) + 2;
+  const paddedLines = bannerLines.map((line) => line.padEnd(rowWidth));
 
+  paddedLines.forEach((line) => console.log(SHADOW(` ${line}`)));
   process.stdout.write(`\x1b[${bannerLines.length}A`);
-
-  for (const line of bannerLines) {
-    console.log(FACE(line.padEnd(rowWidth)));
-  }
-
+  paddedLines.forEach((line) => console.log(FACE(line)));
   console.log();
 }
 

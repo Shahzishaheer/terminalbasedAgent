@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import { select, isCancel } from "@clack/prompts";
+import runAgentMode from "./Agent/orchestrator";
 
 export default async function runCliMode() {
   while (true) {
@@ -12,17 +13,18 @@ export default async function runCliMode() {
         { value: "back", label: `${chalk.white("←")} Back to CLI mode` },
       ],
     });
+
     if (isCancel(mode) || mode === "back") {
       break;
     }
+
     if (mode === "Agent") {
-      console.log("Agent")
+      await runAgentMode();
     } else if (mode === "Plan") {
-      console.log("Plan")
+      console.log("Plan mode is not implemented yet.");
     } else if (mode === "Ask") {
-      console.log("Ask")
-    }
-    if (mode !== "Agent" && mode !== "Plan" && mode !== "Ask") {
+      console.log("Ask mode is not implemented yet.");
+    } else {
       console.log(chalk.yellow("\nThat mode is not implemented yet.\n"));
     }
   }

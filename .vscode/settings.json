@@ -1,4 +1,7 @@
 {
-  "terminal.integrated.enableBell": false,
-  "audioCues.enabled": "off"
+  "audioCues.enabled": "off",
+  "accessibility.signals.terminalBell": {
+    "sound": "off"
+  },
+  "terminal.integrated.enableVisualBell": false
 }

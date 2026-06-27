@@ -17,7 +17,7 @@ const runAgentMode = async () => {
     placeholder: "e.g., Assist with coding tasks",
   });
 
-  if (isCancel(goal)) {
+  if (isCancel(goal)|| !goal.trim()){
     console.log(chalk.yellow("Operation cancelled."));
     return;
   }

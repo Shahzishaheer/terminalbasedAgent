@@ -7,6 +7,7 @@ import createAgentTools from "./agent-tool";
 import { stepCountIs, ToolLoopAgent } from "ai";
 import { getAgentModel } from "../../ai";
 import renderterminalMarkdown from "../../tui/terminal-md";
+import { runApprovalFlow } from "./approval";
 
 const runAgentMode = async () => {
   console.log(chalk.bold("\n🤖 Agent mode\n"));
@@ -227,7 +228,7 @@ const runAgentMode = async () => {
   if (result.text?.trim()) {
     console.log(renderterminalMarkdown(result.text));
   }
-   const ok = await runApprovalflow(tracker);
+   const ok = await runApprovalFlow(tracker);
 if(!ok) { 
   return executor.clearStaging();
 }
